@@ -1,0 +1,18 @@
+---
+%{ for k, v in hosts }
+- hosts: ${k}
+  gather_facts: no
+  tasks:
+    - name: Waiting for connections to ${k}
+      wait_for_connection:
+    - name: Gathering facts
+      setup:
+
+- name: Converge ${k}
+  hosts: ${k}
+  become: yes
+  tasks:
+    - name: run role ${k}
+      include_role:
+        name: ${v.role}
+%{ endfor }
