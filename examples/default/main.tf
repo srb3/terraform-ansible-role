@@ -3,7 +3,8 @@ provider "libvirt" {
 }
 
 module "nginx_rp" {
-  source                     = "/home/steveb/workspace/terraform/modules/srb3/terraform-libvirt-domain"
+  source                     = "srb3/domain/libvirt"
+  version                    = "0.0.1"
   hostname                   = "nginx-rp-1"
   user                       = "centos"
   ssh_public_key             = "~/.ssh/id_rsa.pub"
