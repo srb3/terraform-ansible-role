@@ -5,10 +5,11 @@ provider "libvirt" {
 module "nginx_rp" {
   source                     = "/home/steveb/workspace/terraform/modules/srb3/terraform-libvirt-domain"
   hostname                   = "nginx-rp-1"
-  user                       = "steveb"
-  ssh_public_key             = "/home/steveb/.ssh/id_rsa.pub"
+  user                       = "centos"
+  ssh_public_key             = "~/.ssh/id_rsa.pub"
   os_name                    = "centos"
   os_version                 = "8"
+  os_cached_image            = var.os_cached_image
   unique_libvirt_domain_name = false
 }
 
@@ -24,9 +25,11 @@ locals {
   ]
   hosts = {
     "reverse-proxy" = {
-      role  = "geerlingguy.nginx"
-      hosts = [module.nginx_rp.ip]
-      vars  = local.conf
+      role            = "geerlingguy.nginx"
+      hosts           = [module.nginx_rp.ip]
+      vars            = local.conf
+      ssh_user        = "centos"
+      ssh_private_key = "~/.ssh/id_rsa"
     }
   }
 }
