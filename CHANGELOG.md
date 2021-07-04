@@ -7,7 +7,7 @@
 - Updated example to use terraform registry version of
   the libvert domain module
 
-  ([PR #3](https://github.com/srb3/terraform-ansible-role/pull/3))
+  ([PR #2](https://github.com/srb3/terraform-ansible-role/pull/2))
 
 ## 0.0.2
 
@@ -24,4 +24,4 @@
 
   For changes prior to this, refer to [commit history](https://github.com/srb3/terraform-ansible-role/commits/main)
 
-  ([PR #2](https://github.com/srb3/terraform-ansible-role/pull/1))
+  ([PR #1](https://github.com/srb3/terraform-ansible-role/pull/1))
