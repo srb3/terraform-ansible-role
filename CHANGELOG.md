@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.0.4
+
+🆕 New features:
+
+- Add a trigger so that ansible re-runs if any of the input
+  varuables change
+
+
+  ([PR #3](https://github.com/srb3/terraform-ansible-role/pull/3))
+
 ## 0.0.3
 
 🆕 New features:

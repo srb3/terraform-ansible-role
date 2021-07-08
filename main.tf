@@ -59,6 +59,9 @@ resource "null_resource" "execute_ansible_install" {
 }
 
 resource "null_resource" "execute_ansible_role" {
+  triggers = {
+    value = md5(join(",", [jsonencode(var.hosts), jsonencode(var.roles)]))
+  }
   depends_on = [null_resource.execute_ansible_install]
 
   provisioner "local-exec" {
