@@ -33,10 +33,21 @@ locals {
       ssh_private_key = "~/.ssh/id_rsa"
     }
   }
+  extra_vars = {
+    nginx_vhosts = [
+      {
+        "listen"      = "8000"
+        "server_name" = "sample.com www.sample.com"
+        "return"      = "301 https://twitter.com$request_uri"
+        "filename"    = "sample.com.8000.conf"
+      }
+    ]
+  }
 }
 
 module "deploy_nginx" {
-  source = "../../"
-  roles  = local.roles
-  hosts  = local.hosts
+  source     = "../../"
+  roles      = local.roles
+  hosts      = local.hosts
+  extra_vars = local.extra_vars
 }

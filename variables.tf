@@ -15,3 +15,9 @@ variable "hosts" {
   }))
   default = {}
 }
+
+variable "extra_vars" {
+  description = "A map of extra variables to pass to the ansible playbook command"
+  type        = map(any)
+  default     = {}
+}
