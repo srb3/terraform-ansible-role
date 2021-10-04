@@ -58,6 +58,15 @@ resource "null_resource" "execute_ansible_install" {
   }
 }
 
+locals {
+  command = (length(var.extra_vars) > 0
+    ?
+    "ansible-playbook -i ./hosts playbook/site.yml --extra-vars '${jsonencode(var.extra_vars)}'"
+    :
+    "ansible-playbook -i ./hosts playbook/site.yml"
+  )
+}
+
 resource "null_resource" "execute_ansible_role" {
   triggers = {
     value = md5(join(",", [jsonencode(var.hosts), jsonencode(var.roles)]))
@@ -65,7 +74,7 @@ resource "null_resource" "execute_ansible_role" {
   depends_on = [null_resource.execute_ansible_install]
 
   provisioner "local-exec" {
-    command     = "ansible-playbook -i ./hosts playbook/site.yml"
+    command     = local.command
     working_dir = local.ansible_location
     environment = {
       ANSIBLE_HOST_KEY_CHECKING = "False"
